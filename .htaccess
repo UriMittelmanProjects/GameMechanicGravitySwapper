@@ -1,0 +1,29 @@
+<Files *.br>
+  AddType application/octet-stream .br
+  AddEncoding br .br
+</Files>
+
+<Files *.js.br>
+  AddType application/javascript .br
+  AddEncoding br .br
+</Files>
+
+<Files *.data.br>
+  AddType application/octet-stream .br
+  AddEncoding br .br
+</Files>
+
+<Files *.wasm.br>
+  AddType application/wasm .br
+  AddEncoding br .br
+</Files>
+
+<Files *.framework.js.br>
+  AddType application/javascript .br
+  AddEncoding br .br
+</Files>
+
+<Files *.loader.js.br>
+  AddType application/javascript .br
+  AddEncoding br .br
+</Files>
