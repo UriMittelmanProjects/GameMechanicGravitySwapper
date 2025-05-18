@@ -49,6 +49,12 @@ public class PlayerController : MonoBehaviour
             rb.linearVelocity = new Vector2(rb.linearVelocity.x, 0f); // Reset vertical velocity
             rb.AddForce(-Physics2D.gravity.normalized * jumpForce, ForceMode2D.Impulse);
         }
+
+        // Smooth slide down walls if not grounded
+        if (!isGrounded)
+        {
+            rb.linearVelocity += Physics2D.gravity.normalized * 0.5f * Time.deltaTime;
+        }
     }
 
 }
