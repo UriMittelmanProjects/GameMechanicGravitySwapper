@@ -32,25 +32,23 @@ public class PlayerController : MonoBehaviour
             0f,
             raycastDirection,
             extraHeightCheck,
-            LayerMask.GetMask("Default")
+            LayerMask.GetMask("Ground") // Make sure your ground objects are on this layer
         );
 
         isGrounded = raycastHit.collider != null;
 
-        // Determine if gravity is reversed (pointing upward)
+        // Determine gravity direction
         bool isGravityReversed = Physics2D.gravity.y > 0;
 
-        // Jump logic based on gravity direction
-        if (isGrounded)
+        // Jumping
+        bool jumpKeyPressed = (isGravityReversed && Input.GetKeyDown(KeyCode.S)) ||
+                              (!isGravityReversed && Input.GetKeyDown(KeyCode.W));
+
+        if (jumpKeyPressed && isGrounded)
         {
-            // Use W to jump when gravity is normal (downward)
-            // Use S to jump when gravity is reversed (upward)
-            if ((isGravityReversed && Input.GetKeyDown(KeyCode.S)) ||
-                (!isGravityReversed && Input.GetKeyDown(KeyCode.W)))
-            {
-                // Jump in opposite direction of gravity
-                rb.AddForce(-Physics2D.gravity.normalized * jumpForce, ForceMode2D.Impulse);
-            }
+            rb.linearVelocity = new Vector2(rb.linearVelocity.x, 0f); // Reset vertical velocity
+            rb.AddForce(-Physics2D.gravity.normalized * jumpForce, ForceMode2D.Impulse);
         }
     }
+
 }
